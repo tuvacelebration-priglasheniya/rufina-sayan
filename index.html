@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f8ece9">
+<title>ҮШ ДАКПЫР ЧАЛАЛГА! — Саян & Руфина</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --pink:#f8ece9;
+  --pink2:#f3dcd9;
+  --paper:#fff9f5;
+  --wine:#7e3b3f;
+  --wine2:#9d5a58;
+  --gold:#b9956b;
+  --text:#75564f;
+  --muted:#a68a81;
+  --line:#e6c9c1;
+  --white:#fffdfb;
+}
+
+* {box-sizing:border-box;margin:0;padding:0}
+html {scroll-behavior:smooth}
+body {
+  background:var(--pink);
+  color:var(--text);
+  font-family:Montserrat,sans-serif;
+  font-weight:400;
+  overflow-x:hidden;
+}
+body.locked {overflow:hidden}
+button {font:inherit;cursor:pointer}
+img {max-width:100%;display:block}
+a {color:inherit;text-decoration:none}
+
+.paper-texture {
+  background-color:var(--pink);
+  background-image:
+    radial-gradient(ellipse at 20% 20%,rgba(255,255,255,.65),transparent 55%),
+    radial-gradient(ellipse at 80% 70%,rgba(218,160,157,.13),transparent 50%);
+}
+.section {
+  position:relative;
+  padding:85px 20px;
+  text-align:center;
+  overflow:hidden;
+}
+.inner {max-width:760px;margin:auto}
+.script {
+  font-family:"Great Vibes",cursive;
+  color:var(--wine);
+}
+.serif {font-family:"Cormorant Garamond",serif}
+.eyebrow {
+  color:var(--gold);
+  text-transform:uppercase;
+  letter-spacing:4px;
+  font-size:9px;
+  margin-bottom:17px;
+}
+.heading {
+  font:400 clamp(36px,8vw,55px) "Cormorant Garamond",serif;
+  color:var(--wine);
+  line-height:1.12;
+}
+.subheading {
+  font:400 27px "Great Vibes",cursive;
+  color:var(--wine2);
+}
+.ornament {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:13px;
+  color:var(--gold);
+  margin:22px auto;
+}
+.ornament:before,.ornament:after {
+  content:"";
+  width:55px;height:1px;background:var(--gold);opacity:.65;
+}
+.ornament span {font-size:17px}
+
+.ethnic-border {
+  position:relative;
+}
+.ethnic-border:before {
+  content:"";
+  position:absolute;
+  inset:9px;
+  border:1px solid rgba(185,149,107,.65);
+  pointer-events:none;
+}
+.ethnic-border:after {
+  content:"◇  ◈  ◇  ◈  ◇";
+  position:absolute;
+  left:50%;bottom:-10px;
+  transform:translateX(-50%);
+  background:var(--paper);
+  padding:0 12px;
+  color:var(--gold);
+  font-size:13px;
+  letter-spacing:4px;
+  white-space:nowrap;
+}
+
+/* =====================
+   1. КОНВЕРТ
+===================== */
+#intro {
+  position:fixed;inset:0;z-index:1000;
+  display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  background:
+    radial-gradient(ellipse at center,#fff9f4 0%,#f7e4e1 75%,#eed4d1 100%);
+  transition:opacity 1s,visibility 1s;
+}
+#intro.hide {opacity:0;visibility:hidden;pointer-events:none}
+.envelope {
+  position:relative;
+  width:min(82vw,370px);
+  height:min(58vw,255px);
+  perspective:1200px;
+  filter:drop-shadow(0 22px 22px rgba(105,60,60,.18));
+  cursor:pointer;
+}
+.env-back {
+  position:absolute;inset:0;
+  background:#b96e70;
+  border-radius:4px;
+}
+.env-letter {
+  position:absolute;z-index:2;
+  width:85%;height:92%;
+  left:7.5%;top:4%;
+  background:#fffaf4;
+  border:1px solid #d5b58b;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;
+  transition:transform 1.1s .35s cubic-bezier(.2,.8,.2,1);
+  padding: 10px;
+}
+.env-letter strong {
+  font:400 clamp(32px,8vw,48px) "Great Vibes",cursive;
+  color:var(--wine);
+  margin:0;
+  line-height: 1.1;
+  text-align: center;
+}
+.env-front {
+  position:absolute;inset:0;z-index:4;
+  background:#d99d99;
+  clip-path:polygon(0 0,50% 55%,100% 0,100% 100%,0 100%);
+}
+.env-flap {
+  position:absolute;z-index:5;inset:0;height:62%;
+  background:#c17c7b;
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  transform-origin:top;
+  transition:transform .85s ease;
+  backface-visibility:hidden;
+}
+.env-seal {
+  position:absolute;z-index:7;
+  left:50%;top:57%;
+  transform:translate(-50%,-50%);
+  width:65px;height:65px;border-radius:50%;
+  display:grid;place-items:center;
+  background:radial-gradient(circle at 35% 25%,#c47b78,#783b43);
+  border:2px solid #d3a98a;
+  color:#f7dfc1;
+  font:20px "Cormorant Garamond",serif;
+  box-shadow:0 3px 9px #75434b55;
+  transition:opacity .4s;
+}
+.envelope.open .env-flap {transform:rotateX(180deg)}
+.envelope.open .env-letter {transform:translateY(-90%) scale(1.05)}
+.envelope.open .env-seal {opacity:0}
+.tap {
+  margin-top:48px;
+  font-size:9px;letter-spacing:3px;
+  color:var(--wine2);
+  animation:breath 2s infinite;
+  text-transform: uppercase;
+}
+@keyframes breath {50%{opacity:.4}}
+
+/* =====================
+   2. КАРТОЧКА
+===================== */
+#card-stage {
+  position:fixed;inset:0;z-index:1001;
+  display:grid;place-items:center;
+  background:rgba(249,232,229,.98);
+  opacity:0;visibility:hidden;
+  transition:opacity .8s,visibility .8s;
+}
+#card-stage.show {opacity:1;visibility:visible}
+.invite-card {
+  position:relative;
+  width:min(88%,400px);
+  min-height:510px;
+  padding:58px 25px;
+  background:var(--paper);
+  border:1px solid #c9a77e;
+  outline:1px solid #d9c2a6;
+  outline-offset:6px;
+  text-align:center;
+  box-shadow:0 20px 60px #88554c20;
+  transform:translateY(35px) scale(.93);
+  transition:transform .9s;
+}
+#card-stage.show .invite-card {transform:none}
+.invite-card .big-title {
+  font:400 43px "Cormorant Garamond",serif;
+  color:var(--wine);margin:25px 0 12px;
+}
+.invite-card .names {
+  font:42px "Great Vibes",cursive;
+  color:var(--wine);
+  margin:23px 0;
+}
+.invite-card p {
+  font:18px "Cormorant Garamond",serif;
+  line-height:1.6;
+}
+.gold-button {
+  margin-top:32px;
+  border:1px solid var(--gold);
+  background:var(--wine);
+  color:#fff7ed;
+  padding:15px 30px;
+  font-size:9px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  transition:.3s;
+}
+.gold-button:hover {background:transparent;color:var(--wine)}
+
+/* =====================
+   ОСНОВНОЙ САЙТ
+===================== */
+#site {opacity:0;visibility:hidden;transition:opacity 1s}
+#site.visible {opacity:1;visibility:visible}
+.music {
+  position:fixed;right:17px;bottom:17px;z-index:900;
+  width:47px;height:47px;border-radius:50%;
+  border:1px solid var(--gold);
+  color:var(--wine);background:#fff9f2ed;
+  box-shadow:0 4px 15px #784b4922;
+  display:none;font-size:19px;
+}
+.music.visible {display:grid;place-items:center}
+
+/* HERO */
+.hero {
+  min-height:100svh;
+  display:flex;align-items:center;justify-content:center;
+  background:
+    radial-gradient(ellipse at center,#fff9f4 0%,#f6e3e1 80%);
+  padding:80px 20px;
+}
+.hero-content {max-width:700px;width:100%;position:relative}
+.hero h1 {
+  font:400 clamp(42px,10vw,75px) "Cormorant Garamond",serif;
+  color:var(--wine);line-height:1.15;
+  margin:27px 0 9px;
+}
+.hero h2 {
+  font:400 clamp(43px,10vw,65px) "Great Vibes",cursive;
+  color:var(--wine2);
+}
+.hero-note {
+  font:italic 21px "Cormorant Garamond",serif;
+  margin-top:25px;color:var(--text);
+}
+
+/* ОБРАЩЕНИЕ */
+.welcome {background:#fff8f3}
+.welcome-box {
+  position:relative;
+  padding:42px 25px;
+  margin-top:32px;
+  background:#fffaf6;
+  border:1px solid var(--line);
+  box-shadow:0 10px 35px #a56b6010;
+}
+.welcome-box p {
+  font:400 clamp(19px,4.8vw,24px) "Cormorant Garamond",serif;
+  line-height:1.7;color:#795a51;
+}
+.welcome-box p+p {margin-top:17px}
+.welcome-box .first-line {
+  color:var(--wine);
+  font-weight:600;
+}
+.ornament-divider {
+  font-size:19px;color:var(--gold);margin:20px 0;
+}
+
+/* СОБЫТИЯ */
+.events {background:#f8e9e6}
+.event-card {
+  position:relative;
+  max-width:650px;
+  margin:50px auto 65px;
+  padding:34px 22px 38px;
+  background:#fffaf5;
+  border:1px solid #e5c9c0;
+  box-shadow:0 12px 35px #8d575414;
+}
+.event-card:last-child {margin-bottom:0}
+.event-title {
+  font:400 42px "Great Vibes",cursive;
+  color:var(--wine);margin:12px 0 3px;
+}
+.event-subtitle {
+  font:400 26px "Cormorant Garamond",serif;
+  color:var(--gold);
+}
+.event-photo-wrap {
+  position:relative;
+  width:min(78vw,320px);
+  margin:30px auto 27px;
+  padding:9px;
+  background:#fff;
+  box-shadow:0 8px 25px #80574b25;
+}
+.event-photo-wrap img {
+  width:100%;height:350px;
+  object-fit:cover;
+  object-position:center;
+}
+.flower-frame {
+  border-radius:46% 46% 44% 44%;
+  outline:1px solid #c6a477;
+  outline-offset:7px;
+}
+.flower-frame:before,.flower-frame:after {
+  content:"✿  ❀  ✿";
+  position:absolute;
+  left:50%;transform:translateX(-50%);
+  color:#c39d78;letter-spacing:8px;
+  font-size:18px;white-space:nowrap;
+}
+.flower-frame:before {top:-23px}
+.flower-frame:after {bottom:-25px}
+.event-description {
+  font:400 19px "Cormorant Garamond",serif;
+  line-height:1.6;
+  max-width:480px;margin:auto;
+}
+.event-deco {font-size:23px;color:var(--gold);margin-top:20px}
+
+.home-art {
+  width:min(100%,330px);
+  margin:28px auto;
+  padding:15px;
+  background:#fff7ef;
+  border:1px solid #d7b993;
+}
+.home-art svg {width:100%;height:auto;display:block}
+
+/* КАЛЕНДАРЬ */
+.calendar-section {
+  background:#f4dedb;
+}
+.calendar-card {
+  max-width:410px;
+  margin:38px auto 0;
+  background:#fffaf5;
+  padding:30px 21px 27px;
+  border:1px solid #d8b89a;
+  box-shadow:0 15px 35px #8b57541c;
+  position:relative;
+}
+.calendar-card:before {
+  content:"";
+  position:absolute;inset:8px;
+  border:1px solid #e6cbbd;
+  pointer-events:none;
+}
+.calendar-month {
+  font:400 42px "Great Vibes",cursive;
+  color:var(--wine);
+}
+.calendar-year {
+  font-size:9px;letter-spacing:4px;color:var(--gold);
+  margin:5px 0 25px;
+}
+.calendar-grid {
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:7px 2px;
+  position:relative;
+}
+.calendar-grid span {
+  min-height:37px;
+  display:grid;place-items:center;
+  font:400 15px "Cormorant Garamond",serif;
+  position:relative;
+}
+.calendar-grid .weekday {
+  font:500 9px Montserrat,sans-serif;
+  color:var(--gold);
+  min-height:25px;
+}
+.calendar-grid .chosen {
+  color:#fff;
+  font-weight:700;
+  z-index:1;
+}
+.calendar-grid .chosen:before {
+  content:"";
+  position:absolute;
+  width:32px;height:32px;
+  background:var(--wine);
+  border-radius:50%;
+  z-index:-1;
+  box-shadow:0 0 0 4px #ead1c6;
+}
+.calendar-grid .chosen:after {
+  content:"♡";
+  position:absolute;
+  top:-9px;right:-2px;
+  font:15px Georgia,serif;
+  color:#b27d63;
+  transform:rotate(15deg);
+}
+.calendar-note {
+  margin-top:23px;
+  font:400 19px "Cormorant Garamond",serif;
+}
+
+/* COUNTDOWN */
+.countdown-section {background:#fff8f3}
+.countdown {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:9px;
+  max-width:440px;margin:32px auto 0;
+}
+.count-box {
+  background:#fff;
+  border:1px solid #e5c9bc;
+  padding:17px 3px;
+  box-shadow:0 5px 15px #8a555411;
+}
+.count-number {
+  display:block;
+  font:400 clamp(26px,6vw,36px) "Cormorant Garamond",serif;
+  color:var(--wine);
+}
+.count-label {
+  font-size:8px;letter-spacing:1px;color:var(--muted);
+}
+
+/* МЕСТО */
+.location {background:#f8e8e5}
+.restaurant-photo {
+  width:100%;max-width:590px;
+  height:260px;object-fit:cover;
+  margin:30px auto 20px;
+  border:8px solid #fffaf5;
+  outline:1px solid #d7b58c;
+  box-shadow:0 12px 30px #85524c22;
+}
+.address {
+  font:400 24px "Cormorant Garamond",serif;
+  line-height:1.55;color:var(--wine);
+  margin:22px auto;
+}
+.map-button {
+  display:inline-block;
+  margin-top:14px;
+  background:var(--wine);color:#fff8ef;
+  padding:15px 27px;
+  font-size:9px;letter-spacing:2px;
+  border:1px solid var(--wine);
+  transition:.3s;
+}
+.map-button:hover {background:transparent;color:var(--wine)}
+
+/* ФОРМА */
+.rsvp {background:#fff9f4}
+.form-card {
+  max-width:530px;margin:30px auto 0;
+  padding:35px 25px;
+  background:#fff;
+  border:1px solid #e4c8bc;
+  box-shadow:0 12px 35px #8d5a4c13;
+  text-align:left;
+}
+.form-label {
+  display:block;
+  font:400 21px "Cormorant Garamond",serif;
+  color:var(--wine);
+  margin-bottom:12px;
+}
+.name-input {
+  width:100%;
+  border:0;border-bottom:1px solid #d9b9aa;
+  background:transparent;
+  padding:13px 5px;
+  font:400 16px Montserrat,sans-serif;
+  color:var(--text);outline:none;
+  margin-bottom:30px;
+  border-radius:0;
+}
+.name-input:focus {border-color:var(--wine)}
+.choice {
+  display:flex;align-items:center;
+  gap:12px;
+  padding:14px 12px;
+  margin:9px 0;
+  border:1px solid #ead8d0;
+  background:#fffaf7;
+  cursor:pointer;
+  font:400 17px "Cormorant Garamond",serif;
+  transition:.2s;
+}
+.choice:has(input:checked) {
+  border-color:var(--wine);
+  background:#f9e9e6;
+}
+.choice input {
+  accent-color:var(--wine);
+  width:17px;height:17px;
+  flex-shrink:0;
+}
+.submit {
+  width:100%;margin-top:25px;
+  padding:17px;
+  background:var(--wine);
+  border:1px solid var(--wine);
+  color:white;
+  font-size:9px;letter-spacing:3px;
+  text-transform:uppercase;
+  transition:.3s;
+}
+.submit:hover {background:transparent;color:var(--wine)}
+.submit:disabled {opacity:.55;cursor:wait}
+.form-status {
+  display:none;
+  margin-top:18px;
+  text-align:center;
+  font:400 21px "Cormorant Garamond",serif;
+  line-height:1.5;
+  color:var(--wine);
+}
+
+/* FOOTER */
+footer {
+  background:#79464a;
+  color:#fceee7;
+  padding:65px 20px 45px;
+  text-align:center;
+}
+.footer-title {
+  font:400 47px "Great Vibes",cursive;
+  color:#f8ded2;
+}
+.footer-copy {
+  font:400 19px "Cormorant Garamond",serif;
+  line-height:1.8;margin-top:22px;
+}
+.footer-contact {
+  margin-top:25px;
+  font-size:11px;line-height:2.2;
+  color:#f2d8cc;
+}
+.footer-ornament {color:#dfb88f;margin:25px 0;font-size:22px}
+
+.reveal {
+  opacity:0;
+  transform:translateY(25px);
+  transition:opacity .9s ease,transform .9s ease;
+}
+.reveal.in {
+  opacity:1;transform:translateY(0);
+}
+@media (prefers-reduced-motion:reduce) {
+  *,*:before,*:after {animation:none!important;transition:none!important}
+  html {scroll-behavior:auto}
+}
+
+@media(max-width:480px) {
+  .section {padding:72px 17px}
+  .event-card {padding:32px 15px}
+  .event-photo-wrap img {height:310px}
+  .calendar-grid {gap:5px 1px}
+  .calendar-grid span {min-height:34px}
+  .countdown {gap:6px}
+  .count-box {padding:14px 2px}
+  .form-card {padding:29px 19px}
+  .restaurant-photo {height:220px}
+}
+</style>
+</head>
+
+<body class="locked">
+
+<audio id="music" loop preload="none">
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- 1. КОНВЕРТ -->
+<div id="intro">
+  <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Ажыдар">
+    <div class="env-back"></div>
+    <div class="env-letter">
+      <strong>Чалалга</strong>
+    </div>
+    <div class="env-front"></div>
+    <div class="env-flap"></div>
+    <div class="env-seal">С & Р</div>
+  </div>
+</div>
+
+<!-- 2. КАРТОЧКА -->
+<div id="card-stage">
+  <div class="invite-card">
+    <div class="big-title">ҮШ ДАКПЫР<br>ЧАЛАЛГА!</div>
+    <div class="names">Саян & Руфина</div>
+    <p>
+      Үш улуг байырлал.<br>
+      Чаңгыс өг-бүлениң өөрүшкүзү.
+    </p>
+    <div class="ornament"><span>◇</span></div>
+    <p>11 декабря 2026 года<br>15:00</p>
+    <button class="gold-button" id="enter">
+      Ажыдар
+    </button>
+  </div>
+</div>
+
+<!-- 3. САЙТ -->
+<main id="site">
+
+<section class="hero paper-texture">
+  <div class="hero-content">
+    <h1>ҮШ ДАКПЫР<br>ЧАЛАЛГА!</h1>
+    <h2>Саян & Руфина</h2>
+    <p class="hero-note">
+      Үш улуг байырлал.<br>
+      Чаңгыс өг-бүлениң өөрүшкүзү.
+    </p>
+    <div class="ornament"><span>◇</span></div>
+    <div class="hero-date">11 · ДЕКАБРЯ · 2026</div>
+  </div>
+</section>
+
+<section class="section welcome">
+  <div class="inner reveal">
+    <h2 class="heading">Эргим, хүндүлүг төрелдеривис болгаш чоок өңнүктеривис!</h2>
+    <div class="ornament"><span>❀</span></div>
+
+    <div class="welcome-box ethnic-border">
+      <p>
+        Өг-бүлевистиң өлчей-кежиин, улуг өөрүшкүзүн үлежип,<br>
+        Бистиң эрттирер үш дакпыр байырлалывысче:
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section events">
+  <div class="inner reveal">
+    
+    <!-- СОБЫТИЕ 1 -->
+    <article class="event-card reveal">
+      <div class="event-title">Адриана</div>
+      <div class="event-subtitle">«Хылбык дой»</div>
+      <div class="event-photo-wrap flower-frame">
+        <img src="1.jpg" alt="Адриана" loading="lazy">
+      </div>
+      <p class="event-description">
+        Уруувус Адриананың үш харлаан «Хылбык дой» ёзулалынче
+      </p>
+      <div class="event-deco">✿ ✧ ✿</div>
+    </article>
+
+    <!-- СОБЫТИЕ 2 -->
+    <article class="event-card reveal">
+      <div class="event-title">Алдар</div>
+      <div class="event-subtitle">«Дөжек-дой»</div>
+      <div class="event-photo-wrap flower-frame">
+        <img src="2.jpg" alt="Алдар" loading="lazy">
+      </div>
+      <p class="event-description">
+        Чаа төрүттүнген оглувус Алдарның «Дөжек-дою» байырынче
+      </p>
+      <div class="event-deco">✧ ❀ ✧</div>
+    </article>
+
+    <!-- СОБЫТИЕ 3 -->
+    <article class="event-card reveal">
+      <div class="event-title">Өг-бажың найыры</div>
+      <div class="home-art">
+        <svg viewBox="0 0 330 260" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="roof" x1="0" y1="0" x2="1" y2="1">
+              <stop stop-color="#c88d83"/>
+              <stop offset="1" stop-color="#92565b"/>
+            </linearGradient>
+            <linearGradient id="house" x1="0" y1="0" x2="0" y2="1">
+              <stop stop-color="#fff8ed"/>
+              <stop offset="1" stop-color="#eed7c6"/>
+            </linearGradient>
+          </defs>
+          <circle cx="165" cy="125" r="112" fill="#f8e8dc"/>
+          <path d="M55 117 L165 35 L275 117" fill="none" stroke="url(#roof)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M75 110 L75 224 L255 224 L255 110" fill="url(#house)" stroke="#b88c6c" stroke-width="2"/>
+          <path d="M143 224 L143 151 Q165 125 187 151 L187 224" fill="#b87870" stroke="#a66d61" stroke-width="2"/>
+          <rect x="94" y="137" width="35" height="38" rx="2" fill="#e8bd91" stroke="#b88c6c" stroke-width="2"/>
+          <path d="M111 137 V175 M94 156 H129" stroke="#fff4dc" stroke-width="2"/>
+          <rect x="201" y="137" width="35" height="38" rx="2" fill="#e8bd91" stroke="#b88c6c" stroke-width="2"/>
+          <path d="M218 137 V175 M201 156 H236" stroke="#fff4dc" stroke-width="2"/>
+          <path d="M55 225 H275" stroke="#b88c6c" stroke-width="2"/>
+          <path d="M165 35 V12" stroke="#b88c6c" stroke-width="2"/>
+          <path d="M154 21 L165 9 L176 21" fill="none" stroke="#b88c6c" stroke-width="2"/>
+          <g fill="#c18d78">
+            <path d="M35 211 Q15 177 35 155 Q55 178 35 211"/>
+            <path d="M295 211 Q275 177 295 155 Q315 178 295 211"/>
+          </g>
+          <g fill="#d4aa9b">
+            <circle cx="40" cy="145" r="6"/>
+            <circle cx="52" cy="158" r="5"/>
+            <circle cx="290" cy="145" r="6"/>
+            <circle cx="278" cy="158" r="5"/>
+          </g>
+          <g fill="none" stroke="#c39b70" stroke-width="2">
+            <path d="M23 87 Q45 63 67 87 Q45 111 23 87Z"/>
+            <path d="M263 87 Q285 63 307 87 Q285 111 263 87Z"/>
+          </g>
+          <g fill="#c39b70">
+            <path d="M165 0 L170 8 L165 16 L160 8Z"/>
+          </g>
+        </svg>
+      </div>
+      <p class="event-description">
+        Чаа бажыңывыстың «Өг-бажың найыры» байырлалынче
+      </p>
+      <div class="event-deco">⌂ ♡ ⌂</div>
+    </article>
+
+    <div class="welcome-box ethnic-border" style="margin-top: 50px;">
+      <p>
+        Ак сүт дег арыг сеткиливистен Силер бүгүдени хүндүткелдии-биле чалап тур бис!<br>
+        Ажы-төлүвүстүң кежик-чолун, узун назынын йөрээп,<br>
+        Чаа бажыңывыстың оду-көзү кезээде чылыг, чырык болурун күзеп,<br>
+        Байырлыг аяк шайывысче моорлап келиңер!
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<section class="section calendar-section">
+  <div class="inner reveal">
+    <div class="calendar-card">
+      <div class="calendar-month">Декабрь</div>
+      <div class="calendar-year">2026</div>
+      <div class="calendar-grid" id="calendar">
+        <span class="weekday">ПН</span><span class="weekday">ВТ</span><span class="weekday">СР</span><span class="weekday">ЧТ</span><span class="weekday">ПТ</span><span class="weekday">СБ</span><span class="weekday">ВС</span>
+      </div>
+      <p class="calendar-note">
+        Бо хүннү силер-биле кады үлежиксеп тур бис
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section countdown-section">
+  <div class="inner reveal">
+    <h2 class="heading">Ужурашкыже чедир:</h2>
+    <div class="countdown">
+      <div class="count-box"><span class="count-number" id="days">00</span><span class="count-label">ХОНУК</span></div>
+      <div class="count-box"><span class="count-number" id="hours">00</span><span class="count-label">ШАК</span></div>
+      <div class="count-box"><span class="count-number" id="minutes">00</span><span class="count-label">МИНУТ</span></div>
+      <div class="count-box"><span class="count-number" id="seconds">00</span><span class="count-label">СЕКУНД</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section location">
+  <div class="inner reveal">
+    <h2 class="heading">Эртирер чери</h2>
+    <div class="ornament"><span>⌖</span></div>
+    <img src="3.jpg" alt="Банкетный зал" class="restaurant-photo" loading="lazy">
+    <div class="address">
+      Банкетный зал «Хаан-Херети»<br>
+      г. Кызыл, ул. Дружбы 1/8,<br>
+      2 этаж
+    </div>
+    <a class="map-button" href="https://yandex.ru/maps/?text=Россия%2C%20Республика%20Тыва%2C%20Кызыл%2C%20улица%20Дружбы%2C%201%2F8" target="_blank" rel="noopener">
+      Картадан көөр ↗
+    </a>
+  </div>
+</section>
+
+<section class="section rsvp">
+  <div class="inner reveal">
+    <h2 class="heading">Айтырыгларга<br>харыылаптарыңарны<br>диледивис</h2>
+    <div class="ornament"><span>♡</span></div>
+
+    <form class="form-card" id="rsvp" action="https://formspree.io/f/xoedbbad" method="POST">
+      <label class="form-label" for="guest-name">Адыңар (аттарыңар)</label>
+      <input class="name-input" type="text" id="guest-name" name="Адыңар" placeholder="..." autocomplete="name" required>
+
+      <fieldset style="border:0">
+        <legend class="form-label">Байырлалга кым-биле келир силер?</legend>
+        <label class="choice">
+          <input type="radio" name="Кым-биле келир" value="чааскаан" required>
+          <span>чааскаан</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="Кым-биле келир" value="өөм ишти/өөм ээзи-биле">
+          <span>өөм ишти/өөм ээзи-биле</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="Кым-биле келир" value="арай барып шыдавас мен">
+          <span>арай барып шыдавас мен</span>
+        </label>
+      </fieldset>
+
+      <input type="hidden" name="_subject" value="Ответ на приглашение — ҮШ ДАКПЫР ЧАЛАЛГА!">
+
+      <button type="submit" class="submit" id="submit">Отправить ответ</button>
+      <div class="form-status" id="form-status" aria-live="polite"></div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-title">Саян & Руфина</div>
+  <div class="footer-ornament">◇ ❀ ◇</div>
+  <div class="footer-contact">
+    Хүндүткел-биле:<br>
+    <a href="tel:+79010188447">8 901 018-84-47</a>
+  </div>
+</footer>
+
+</main>
+
+<button class="music" id="music-button" type="button" aria-label="Ажыдар/Хаар">♫</button>
+
+<script>
+const envelope = document.getElementById('envelope');
+const intro = document.getElementById('intro');
+const card = document.getElementById('card-stage');
+const site = document.getElementById('site');
+const enter = document.getElementById('enter');
+const audio = document.getElementById('music');
+const musicButton = document.getElementById('music-button');
+
+let opened = false;
+
+function openEnvelope() {
+  if (opened) return;
+  opened = true;
+  envelope.classList.add('open');
+
+  audio.volume = 0.35;
+  audio.play().then(() => {
+    musicButton.textContent = '♫';
+  }).catch(() => {
+    musicButton.textContent = '▶';
+  });
+
+  musicButton.classList.add('visible');
+
+  setTimeout(() => { card.classList.add('show'); }, 950);
+  setTimeout(() => { intro.classList.add('hide'); }, 1850);
+}
+
+envelope.addEventListener('click', openEnvelope);
+envelope.addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    openEnvelope();
+  }
+});
+
+enter.addEventListener('click', () => {
+  card.classList.remove('show');
+  setTimeout(() => {
+    card.style.display = 'none';
+    site.classList.add('visible');
+    document.body.classList.remove('locked');
+    window.scrollTo(0,0);
+  }, 650);
+});
+
+musicButton.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play().then(() => { musicButton.textContent = '♫'; }).catch(() => { musicButton.textContent = '▶'; });
+  } else {
+    audio.pause();
+    musicButton.textContent = '▶';
+  }
+});
+
+// Календарь
+const calendar = document.getElementById('calendar');
+const year = 2026;
+const month = 11;
+const daysInMonth = new Date(year, month + 1, 0).getDate();
+let firstDay = new Date(year, month, 1).getDay();
+firstDay = (firstDay + 6) % 7;
+
+for (let i = 0; i < firstDay; i++) {
+  const empty = document.createElement('span');
+  empty.setAttribute('aria-hidden','true');
+  calendar.appendChild(empty);
+}
+
+for (let day = 1; day <= daysInMonth; day++) {
+  const cell = document.createElement('span');
+  cell.textContent = day;
+  if (day === 11) {
+    cell.className = 'chosen';
+    cell.setAttribute('aria-label','11 декабря');
+  }
+  calendar.appendChild(cell);
+}
+
+// Обратный отсчет
+const target = new Date('2026-12-11T15:00:00+07:00').getTime();
+function updateCountdown() {
+  const diff = target - Date.now();
+  const ids = ['days','hours','minutes','seconds'];
+  if (diff <= 0) {
+    ids.forEach(id => document.getElementById(id).textContent = '00');
+    return;
+  }
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor(diff % 86400000 / 3600000);
+  const m = Math.floor(diff % 3600000 / 60000);
+  const s = Math.floor(diff % 60000 / 1000);
+  document.getElementById('days').textContent = String(d).padStart(2,'0');
+  document.getElementById('hours').textContent = String(h).padStart(2,'0');
+  document.getElementById('minutes').textContent = String(m).padStart(2,'0');
+  document.getElementById('seconds').textContent = String(s).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown,1000);
+
+// Появление
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:0.12});
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Форма
+const form = document.getElementById('rsvp');
+const status = document.getElementById('form-status');
+const submit = document.getElementById('submit');
+
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  if (!form.reportValidity()) return;
+
+  submit.disabled = true;
+  submit.textContent = 'Отправляем...';
+  status.style.display = 'block';
+  status.textContent = 'Пожалуйста, подождите...';
+
+  try {
+    const response = await fetch(form.action, {
+      method:'POST',
+      body:new FormData(form),
+      headers:{'Accept':'application/json'}
+    });
+
+    if (response.ok) {
+      status.textContent = 'Спасибо за ваш ответ!';
+      form.reset();
+      submit.textContent = 'Ответ отправлен ♡';
+    } else {
+      status.textContent = 'Не удалось отправить. Попробуйте ещё раз.';
+      submit.disabled = false;
+      submit.textContent = 'Отправить ответ';
+    }
+  } catch (error) {
+    status.textContent = 'Проверьте интернет и попробуйте снова.';
+    submit.disabled = false;
+    submit.textContent = 'Отправить ответ';
+  }
+});
+</script>
+
+</body>
+</html>
